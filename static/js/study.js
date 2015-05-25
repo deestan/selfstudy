@@ -22,7 +22,7 @@ var tiers = {
 };
 
 function init() {
-  $(".btn-go").on('click', reveal);
+  $(".btn-thinking").on('click', reveal);
   $(".yay .btn").on('click', yay);
   $(".nay .btn").on('click', nay);
   $.getJSON("/api/questions", questionsLoaded);
