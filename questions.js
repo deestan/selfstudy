@@ -1,4 +1,4 @@
-[
+module.exports = [
   { "q": "HTML is an abbreviation for:",
     "a": "HyperText Markup Language" },
   { "q": "CSS is an abbreviation for:",
