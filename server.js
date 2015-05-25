@@ -1,14 +1,14 @@
 var express = require("express");
 var app = express();
 
-var questions = require("./questions");
+var exercises = require("./exercises");
 
 var PORT = 8080;
 
 app.use(express.static(__dirname + "/static"));
 
-app.get('/api/questions', function(req, res) {
-  res.json(questions);
+app.get('/api/exercises', function(req, res) {
+  res.json(exercises);
 });
 
 app.listen(PORT);

@@ -1,7 +1,7 @@
 $(init);
 
-var questions = [{q: "Loading...", a:"Loading..."}];
-var currentQuestion = null;
+var exercises = [{q: "Loading...", a:"Loading..."}];
+var currentExercise = null;
 
 var tiers = {
   "fresh": {
@@ -25,22 +25,22 @@ function init() {
   $(".btn-thinking").on('click', reveal);
   $(".yay .btn").on('click', yay);
   $(".nay .btn").on('click', nay);
-  $.getJSON("/api/questions", questionsLoaded);
+  $.getJSON("/api/exercises", exercisesLoaded);
 }
 
-function setTier(question, tierId) {
+function setTier(exercise, tierId) {
   var t = tiers[tierId];
-  question.nextTime = Date.now() + t.minSecs * 1000;
+  exercise.nextTime = Date.now() + t.minSecs * 1000;
 }
 
-function questionsLoaded(data) {
+function exercisesLoaded(data) {
   while (data.length) {
     var q = data.pop();
     q.tierId = 'fresh';
     q.nextTime = 0;
-    questions.push(q);
+    exercises.push(q);
   }
-  nextQuestion();
+  nextExercise();
 }
 
 function reveal() {
@@ -48,49 +48,49 @@ function reveal() {
 }
 
 function yay() {
-  if (!currentQuestion) return;
-  var tier = tiers[currentQuestion.tierId];
+  if (!currentExercise) return;
+  var tier = tiers[currentExercise.tierId];
   var newTier = tiers[tier.ascendTo];
-  currentQuestion.tierId = tier.ascendTo;
-  currentQuestion.nextTime = Date.now() + newTier.minSecs * 1000;
-  nextQuestion();
+  currentExercise.tierId = tier.ascendTo;
+  currentExercise.nextTime = Date.now() + newTier.minSecs * 1000;
+  nextExercise();
 }
 
 function nay() {
-  if (!currentQuestion) return;
-  var tier = tiers[currentQuestion.tierId];
+  if (!currentExercise) return;
+  var tier = tiers[currentExercise.tierId];
   var newTier = tiers[tier.failTo];
-  currentQuestion.tierId = tier.failTo;
-  currentQuestion.nextTime = Date.now() + newTier.minSecs * 1000;
-  nextQuestion();
+  currentExercise.tierId = tier.failTo;
+  currentExercise.nextTime = Date.now() + newTier.minSecs * 1000;
+  nextExercise();
 }
 
-function nextQuestion() {
+function nextExercise() {
   $('.exercise').removeClass('loading');
 
-  var validQuestions = [];
+  var validExercises = [];
   var now = Date.now();
   var nearest = Infinity;
-  for (var i=0; i < questions.length; i++) {
-    var q = questions[i];
+  for (var i=0; i < exercises.length; i++) {
+    var q = exercises[i];
     if (q.nextTime < nearest)
       nearest = q.nextTime;
     if (q.nextTime < now)
-      validQuestions.push(q);
+      validExercises.push(q);
   }
 
-  if (validQuestions.length == 0) {
+  if (validExercises.length == 0) {
     $('.exercise').addClass('reveal');
     var toWait = nearest - now;
-    $('.question').html("Next question ready in: " + Math.ceil(toWait / 1000) + " seconds.");
+    $('.question').html("Next exercise ready in: " + Math.ceil(toWait / 1000) + " seconds.");
     $('.answer').html("Let's wait!");
-    setTimeout(nextQuestion, 100);
+    setTimeout(nextExercise, 100);
     return;
   }
 
-  currentQuestion = randy.choice(validQuestions);
+  currentExercise = randy.choice(validExercises);
 
   $('.exercise').removeClass('reveal');
-  $('.question').html(currentQuestion.q);
-  $('.answer').html(currentQuestion.a);
+  $('.question').html(currentExercise.q);
+  $('.answer').html(currentExercise.a);
 }
