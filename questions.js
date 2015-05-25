@@ -1,7 +1,7 @@
 module.exports = [
-  { "q": "HTML is an abbreviation for:",
+  { "q": "<p>HTML is an abbreviation for:</p>",
     "a": "HyperText Markup Language" },
-  { "q": "CSS is an abbreviation for:",
+  { "q": "<p>CSS is an abbreviation for:</p>",
     "a": "Cascading Style Sheets" },
   { "q": "<p>What do we call the &lt;h1&gt; and &lt;/h1&gt; parts here?</p><code>&lt;h1&gt;Main heading&lt;/h1&gt;</code>",
     "a": "The opening and closing tags, respectively." },
@@ -11,13 +11,13 @@ module.exports = [
     "a": "<code>&lt;p lang=\"en-US\"&gt;Greetings&lt;/p&gt;</code>" },
   { "q": "<p>What do we call the green part here:</p><code>&lt;p <span style=\"background: green; color: white;\">lang=\"en-us\"</span>&gt;Paragraph in English&lt;/p&gt;</code>",
     "a": "That’s an attribute!" },
-  { "q": "Which element do you need to show the words My Site in the top of the browser window?",
+  { "q": "<p>Which element do you need to show the words My Site in the top of the browser window?</p>",
     "a": "<code>&lt;title&gt;My Site&lt;/title&gt;</code>" },
-  { "q": "What is the purpose of HTML?",
+  { "q": "<p>What is the purpose of HTML?</p>",
     "a": "HTML describes the structure of a web page." },
-  { "q": "Which element do you need for everything displayed within the main browser window?",
+  { "q": "<p>Which element do you need for everything displayed within the main browser window?</p>",
     "a": "<code>&lt;body&gt;</code>" },
-  { "q": "What differs HyperText from just text?",
+  { "q": "<p>What differs HyperText from just text?</p>",
     "a": "HyperText allows links to let you move from on page to another." }
 ]
 
