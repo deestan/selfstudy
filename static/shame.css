@@ -22,6 +22,7 @@ h1 {
 }
 
 .question {
+  display: block;
   margin-bottom: 20px;
 }
 
@@ -86,4 +87,16 @@ h1 {
 
 .reveal .solution-a {
   display: none;
+}
+
+.loading-text {
+  display: none;
+}
+
+.loading .question, .loading .solution-a, .loading .solution-b {
+  display: none;
+}
+
+.loading .loading-text {
+  display: block;
 }
