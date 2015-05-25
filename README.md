@@ -1,1 +1,3 @@
 # selfstudy
+
+\o/
