@@ -10,9 +10,14 @@ var tiers = {
     failTo: "fresh",
     ascendTo: "1m"
   },
-  "1m": {
-    minSecs: 60,
+  "2m": {
+    minSecs: 2 * 60,
     failTo: "fresh",
+    ascendTo: "15m"
+  },
+  "15m": {
+    minSecs: 15 * 60,
+    failTo: "2m",
     ascendTo: "finished"
   },
   "finished": {
