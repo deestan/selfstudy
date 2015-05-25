@@ -12,10 +12,16 @@
 <body>
 <header>
   <h1>Selfstudy</h1>
-  <p>This is an experimental self-study tool.</p>
-  <p>Read the exercise, take a moment to think about your answer 
-     — and when you think you have it, hit go and check if you have it.</p>
 </header>
+
+<div class="instructions">
+  <p>Read the exercise, take a moment to think about your answer 
+     —&nbsp;and when you think you have it, hit the button to check.</p>
+  <p>You then need to evaluate the answer you were thinking of.
+  </p>
+  <p><strong>Got it!</strong> → I don’t need this repeated immediately.</p>
+  <p><strong>Not yet</strong> → I need to practice this. Plz repeat.</p>
+</div>
 
 <div class="exercise">
   <div class="question">
@@ -25,14 +31,16 @@
 
   
   <div class="solution-a">
-    <a class="btn-go">?</a>
+    <div class="thinking">
+       <a class="btn-thinking">I think I’ve got it.</a>
+    </div>
   </div>
 
-  <div class="solution-b">
+  <div class="solution-bx">
     <div class="answer">An HTML element.</div>
     <ul class="feedback">
       <li class="yay"><a class="btn">Got it!</a></li>
-      <li class="nay"><a class="btn">Not quite.</a></li>
+      <li class="nay"><a class="btn">Not yet.</a></li>
     </ul>
   </div>
   
