@@ -17,16 +17,22 @@
   ],
   "author": "Helge S. Holm",
   "contributors": [
-    { "name": "Elisabeth Irgens",
+    {
+      "name": "Elisabeth Irgens",
       "email": "hei@elisabethirgens.no",
       "url": "http://elisabethirgens.no/"
     },
-    { "name": "Helge Skogly Holm",
-      "email": "helge.holm@gmail.com" }
+    {
+      "name": "Helge Skogly Holm",
+      "email": "helge.holm@gmail.com"
+    }
   ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/deestan/selfstudy/issues"
   },
-  "homepage": "https://github.com/deestan/selfstudy"
+  "homepage": "https://github.com/deestan/selfstudy",
+  "dependencies": {
+    "express": "^4.12.4"
+  }
 }
