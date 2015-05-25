@@ -11,7 +11,6 @@ function init() {
 }
 
 function questionsLoaded(data) {
-  $('.exercise').removeClass('loading');
   questions = randy.shuffle(data);
   archive = [];
   nextQuestion();
@@ -32,6 +31,13 @@ function nay() {
 }
 
 function nextQuestion() {
+  $('.exercise').removeClass('loading');
+
+  if (questions.length == 0) {
+    questions = randy.shuffle(archive);
+    archive = [];
+  }
+
   var q = questions.pop();
   archive.push(q);
   $('.question').html(q.q);
