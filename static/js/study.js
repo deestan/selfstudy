@@ -1,6 +1,7 @@
 $(init);
 
-var exercises = [{q: "Loading...", a:"Loading..."}];
+var database = { exercises: [{q: "Loading...", a:"Loading..."}],
+                 version: 0 };
 var currentExercise = null;
 
 var tiers = {
@@ -33,12 +34,23 @@ function setTier(exercise, tierId) {
   exercise.nextTime = Date.now() + t.minSecs * 1000;
 }
 
+function save() {
+  localStorage.setItem('database', JSON.stringify(database));
+}
+
 function exercisesLoaded(data) {
-  while (data.length) {
-    var q = data.pop();
-    q.tierId = 'fresh';
-    q.nextTime = 0;
-    exercises.push(q);
+  try {
+    database = JSON.parse(localStorage.getItem('database'));
+  } catch (error) {
+    database = null;
+  }
+  if (!database || database.version != data.version) {
+    database = data;
+    for (var i=0; i < database.exercises.length; i++) {
+      var e = database.exercises[i];
+      e.tierId = 'fresh';
+      e.nextTime = 0;
+    }
   }
   nextExercise();
 }
@@ -53,6 +65,7 @@ function yay() {
   var newTier = tiers[tier.ascendTo];
   currentExercise.tierId = tier.ascendTo;
   currentExercise.nextTime = Date.now() + newTier.minSecs * 1000;
+  save();
   nextExercise();
 }
 
@@ -62,6 +75,7 @@ function nay() {
   var newTier = tiers[tier.failTo];
   currentExercise.tierId = tier.failTo;
   currentExercise.nextTime = Date.now() + newTier.minSecs * 1000;
+  save();
   nextExercise();
 }
 
@@ -71,8 +85,8 @@ function nextExercise() {
   var validExercises = [];
   var now = Date.now();
   var nearest = Infinity;
-  for (var i=0; i < exercises.length; i++) {
-    var q = exercises[i];
+  for (var i=0; i < database.exercises.length; i++) {
+    var q = database.exercises[i];
     if (q.nextTime < nearest)
       nearest = q.nextTime;
     if (q.nextTime < now)
@@ -80,6 +94,7 @@ function nextExercise() {
   }
 
   if (validExercises.length == 0) {
+    currentExercise = null;
     $('.exercise').addClass('reveal');
     var toWait = nearest - now;
     $('.question').html("Next exercise ready in: " + Math.ceil(toWait / 1000) + " seconds.");
