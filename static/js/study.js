@@ -51,6 +51,7 @@ function yay() {
   if (!currentQuestion) return;
   var tier = tiers[currentQuestion.tierId];
   var newTier = tiers[tier.ascendTo];
+  currentQuestion.tierId = tier.ascendTo;
   currentQuestion.nextTime = Date.now() + newTier.minSecs * 1000;
   nextQuestion();
 }
@@ -59,6 +60,7 @@ function nay() {
   if (!currentQuestion) return;
   var tier = tiers[currentQuestion.tierId];
   var newTier = tiers[tier.failTo];
+  currentQuestion.tierId = tier.failTo;
   currentQuestion.nextTime = Date.now() + newTier.minSecs * 1000;
   nextQuestion();
 }
