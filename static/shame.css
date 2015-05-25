@@ -133,3 +133,29 @@ h1 {
 .loading .loading-text {
   display: block;
 }
+
+.prog {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 10px;
+}
+
+.prog__item {
+  display: inline-block;
+  width: 20%;
+  border: 4px solid #eee;
+  border-top: none;
+  text-align: center;
+  margin-left: -9px; /*inline block fix AND border collapse hack*/
+  padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
