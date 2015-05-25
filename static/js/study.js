@@ -37,7 +37,7 @@ function questionsLoaded(data) {
   while (data.length) {
     var q = data.pop();
     q.tierId = 'fresh';
-    q.nextTime = Date.now();
+    q.nextTime = 0;
     questions.push(q);
   }
   nextQuestion();
