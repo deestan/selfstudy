@@ -1,9 +1,8 @@
 function nextQuestion() {
-  var q = document.getElementById("question");
-  q.innerText = "Wat " + Date.now() + "?";
+  $("#question").text("Wat " + Date.now() + "?");
 }
 
 function init() {
   nextQuestion();
-  document.getElementById("next").onclick = nextQuestion;
+  $("#next").on('click', nextQuestion);
 }
