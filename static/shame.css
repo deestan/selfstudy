@@ -79,3 +79,11 @@ h1 {
 .solution-b {
   display: none;
 }
+
+.reveal .solution-b {
+  display: block;
+}
+
+.reveal .solution-a {
+  display: none;
+}
