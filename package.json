@@ -1,0 +1,32 @@
+{
+  "name": "selfstudy",
+  "version": "0.0.0",
+  "description": "Self-study tool.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deestan/selfstudy"
+  },
+  "keywords": [
+    "study",
+    "retention",
+    "fact"
+  ],
+  "author": "Helge S. Holm",
+  "contributors": [
+    { "name": "Elisabeth Irgens",
+      "email": "hei@elisabethirgens.no",
+      "url": "http://elisabethirgens.no/"
+    },
+    { "name": "Helge Skogly Holm",
+      "email": "helge.holm@gmail.com" }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deestan/selfstudy/issues"
+  },
+  "homepage": "https://github.com/deestan/selfstudy"
+}
