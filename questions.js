@@ -15,7 +15,7 @@ module.exports = [
     "a": "<title>My Site</title>" },
   { "q": "What is the purpose of HTML?",
     "a": "HTML describes the structure of a web page." },
-  { "q": "Which element do you need for everything dispayed withing the main browser window?",
+  { "q": "Which element do you need for everything displayed within the main browser window?",
     "a": "<body>" },
   { "q": "What differs HyperText from just text?",
     "a": "HyperText allows links to let you move from on page to another." }
