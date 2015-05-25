@@ -8,7 +8,7 @@ var tiers = {
   "fresh": {
     minSecs: 5,
     failTo: "fresh",
-    ascendTo: "1m"
+    ascendTo: "2m"
   },
   "2m": {
     minSecs: 2 * 60,
