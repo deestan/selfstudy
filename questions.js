@@ -9,7 +9,7 @@ module.exports = [
     "a": "An HTML element." },
   { "q": "Place an attribute with name \"lang\" and value \"en-US\" in this element:<br><code>&lt;p&gt;Greetings&lt;/p&gt;</code>",
     "a": "<code>&lt;p lang=\"en-US\"&gt;Greetings&lt;/p&gt;</code>" },
-  { "q": "What do we call the green part here:<br><code>&lt;p lang=\"en-us\"&gt;Paragraph in English&lt;/p&gt;</code>",
+  { "q": "What do we call the green part here:<br><code>&lt;p <span style=\"background: green; color: white;\">lang=\"en-us\"</span>&gt;Paragraph in English&lt;/p&gt;</code>",
     "a": "That’s an attribute!" },
   { "q": "Which element do you need to show the words My Site in the top of the browser window?",
     "a": "<code>&lt;title&gt;My Site&lt;/title&gt;</code>" },
