@@ -55,6 +55,11 @@ p {
    margin-bottom: 40px;    
 }
 
+.evaluate-msg {
+  font-size: 18px;
+  font-style: italic;
+}
+
 .feedback {
   list-style-type: none;
   padding-left: 0;
