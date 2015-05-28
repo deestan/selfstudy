@@ -37,7 +37,7 @@ app.get('/logout', function(req, res) {
 });
 
 app.get('/user', function(req, res) {
-  res.json(req.user);
+  res.json(req.user || null);
 });
 
 app.listen(PORT);

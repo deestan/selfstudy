@@ -171,10 +171,15 @@ p {
 /* styles for ze log in form */
 
 .loginbox {
+  display: none;
   max-width: 300px;
   float: right;
   margin-left: 40px;
   margin-bottom: 40px;
+}
+
+.loggedinuser {
+  display: none;
 }
 
 form {
