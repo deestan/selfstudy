@@ -36,6 +36,10 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+app.get('/user', function(req, res) {
+  res.json(req.user);
+});
+
 app.listen(PORT);
 console.log("Server running at:");
 console.log("http://localhost:" + PORT + "/");
