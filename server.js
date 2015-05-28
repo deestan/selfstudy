@@ -17,7 +17,14 @@ app.use(bodyParser());
 app.use(session({ secret: "headbunny" }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
+
+// Deny access to all but /login paths if not logged in
+app.use(function(req, res, next) {
+  if (req.user == null && req.path.indexOf('/login'))
+    return res.redirect('/login.html');
+  next();
+});
+
 app.use(express.static(__dirname + "/static"));
 
 app.get('/api/exercises', function(req, res) {
@@ -27,9 +34,13 @@ app.get('/api/exercises', function(req, res) {
 
 app.post('/login', passport.authenticate('local-login', {
   successRedirect: '/',
-  failureRedirect: '/login.html',
-  failureFlash: true
+  failureRedirect: '/login.html'
 }));
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
 
 app.listen(PORT);
 console.log("Server running at:");
