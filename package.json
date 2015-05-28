@@ -33,6 +33,9 @@
   },
   "homepage": "https://github.com/deestan/selfstudy",
   "dependencies": {
-    "express": "^4.12.4"
+    "express": "^4.12.4",
+    "node-redis": "^0.1.7",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0"
   }
 }
