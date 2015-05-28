@@ -18,13 +18,6 @@ app.use(session({ secret: "headbunny" }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Deny access to all but /login paths if not logged in
-app.use(function(req, res, next) {
-  if (req.user == null && req.path.indexOf('/login'))
-    return res.redirect('/login.html');
-  next();
-});
-
 app.use(express.static(__dirname + "/static"));
 
 app.get('/api/exercises', function(req, res) {
