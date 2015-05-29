@@ -180,6 +180,8 @@ p {
 
 .loggedinuser {
   display: none;
+  font-style: italic;
+  margin-bottom: 1em;
 }
 
 form {
