@@ -21,12 +21,7 @@ h1 {
   font-size: 2em;
 }
 
-h2 {
-  font-size: 1.125em;
-  margin-bottom: 0;
-  text-transform: uppercase;
-  color: #86867E;
-}
+
 
 p {
   margin: 0 0 1em 0;
@@ -34,6 +29,22 @@ p {
 
 .instructions {
   max-width: 34em;
+}
+
+.instructions h2 {
+  font-size: 1em;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+.instr-yay {
+  font-weight: bold;
+  color:  #3FA66C;
+}
+
+.instr-nay {
+  font-weight: bold;
+  color: #C65353;
 }
 
 .exercise {
@@ -149,6 +160,13 @@ p {
 
 .loading .loading-text {
   display: block;
+}
+
+.progress-title {
+  font-size: 1.125em;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  color: #86867E;
 }
 
 .prog {
