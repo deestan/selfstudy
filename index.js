@@ -23,5 +23,8 @@ try {
 |------\"--------------------------------------\"-------|\n\
 `-----------------------------------------------------'");
     console.log(error.message);
+  } else {
+    console.error(error.stack || error);
+    process.exit(1);
   }
 }
