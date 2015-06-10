@@ -24,8 +24,7 @@ app.use(express.static(__dirname + "/static"));
 app.get('/api/exercises', function(req, res) {
   database.getExercises(function(err, exercises) {
     if (err) return res.status(500).send(err);
-    res.json({ exercises: exercises,
-               version: serverStartTime });
+    res.json({ exercises: exercises });
   });
 });
 

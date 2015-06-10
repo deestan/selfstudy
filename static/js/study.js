@@ -1,7 +1,7 @@
 $(init);
 
-var database = { exercises: [{q: "Loading...", a:"Loading..."}],
-                 version: 0 };
+var database = { exercises: [{q: "Loading...", a:"Loading..."}] };
+var progress = {};
 var currentExercise = null;
 
 var tiers = {
@@ -46,22 +46,24 @@ function setTier(exercise, tierId) {
 }
 
 function save() {
-  localStorage.setItem('database', JSON.stringify(database));
+  localStorage.setItem('progress', JSON.stringify(progress));
+}
+
+function getProgress(exerciseId) {
+  if (!progress[exerciseId])
+    progress[exerciseId] = {
+      tierId: 'fresh',
+      nextTime: 0
+    };
+  return progress[exerciseId];
 }
 
 function exercisesLoaded(data) {
+  database = data;
   try {
-    database = JSON.parse(localStorage.getItem('database'));
+    progress = JSON.parse(localStorage.getItem('progress')) || {};
   } catch (error) {
-    database = null;
-  }
-  if (!database || database.version != data.version) {
-    database = data;
-    for (var i=0; i < database.exercises.length; i++) {
-      var e = database.exercises[i];
-      e.tierId = 'fresh';
-      e.nextTime = 0;
-    }
+    progress = {};
   }
   updateBuckets();
   nextExercise();
@@ -74,10 +76,13 @@ function reveal() {
 function exerciseAnswered(succeeded) {
   if (!currentExercise) return;
   var direction = succeeded ? "ascendTo" : "failTo";
-  var tier = tiers[currentExercise.tierId];
+  var currentProgress = getProgress(currentExercise.id);
+  var tier = tiers[currentProgress.tierId];
   var newTier = tiers[tier[direction]];
-  currentExercise.tierId = tier[direction];
-  currentExercise.nextTime = Date.now() + newTier.minSecs * 1000;
+  progress[currentExercise.id] = {
+    tierId: tier[direction],
+    nextTime: Date.now() + newTier.minSecs * 1000
+  };
   updateBuckets();
   save();
   nextExercise();
@@ -105,9 +110,10 @@ function nextExercise() {
   var nearest = Infinity;
   for (var i=0; i < database.exercises.length; i++) {
     var q = database.exercises[i];
-    if (q.nextTime < nearest)
-      nearest = q.nextTime;
-    if (q.nextTime < now)
+    var p = getProgress(q.id);
+    if (p.nextTime < nearest)
+      nearest = p.nextTime;
+    if (p.nextTime < now)
       validExercises.push(q);
   }
 
@@ -144,7 +150,8 @@ function calculateFinishedness() {
   }
   // Count exercises into buckets!
   for (var i=0; i < database.exercises.length; i++) {
-    var bucketId = bucketIdOfTier[database.exercises[i].tierId];
+    var p = getProgress(database.exercises[i].id);
+    var bucketId = bucketIdOfTier[p.tierId];
     buckets[bucketId]++;
   }
   return buckets;
