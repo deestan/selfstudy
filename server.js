@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var flash = require("connect-flash");
 
-var exercises = require("./exercises");
+var database = require("./database");
 
 var PORT = 8080;
 var serverStartTime = Date.now();
@@ -22,8 +22,11 @@ app.use(passport.session());
 app.use(express.static(__dirname + "/static"));
 
 app.get('/api/exercises', function(req, res) {
-  res.json({ exercises: exercises,
-             version: serverStartTime });
+  database.getExercises(function(err, exercises) {
+    if (err) return res.status(500).send(err);
+    res.json({ exercises: exercises,
+               version: serverStartTime });
+  });
 });
 
 app.post('/login', passport.authenticate('local-login', {
