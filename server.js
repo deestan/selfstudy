@@ -28,6 +28,21 @@ app.get('/api/exercises', function(req, res) {
   });
 });
 
+app.get('/api/progress', function(req, res) {
+  database.getProgress(req.user, function(err, progress) {
+    if (err) return res.status(500).send(err);
+    res.json({ progress: progress });
+  });
+});
+
+app.put('/api/progress', function(req, res) {
+  var progress = req.body;
+  database.setProgress(req.user, progress, function(err) {
+    if (err) return res.status(500).send(err);
+    res.send("Got it!");
+  });
+});
+
 app.post('/login', passport.authenticate('local-login', {
   successRedirect: '/',
   failureRedirect: '/login.html'

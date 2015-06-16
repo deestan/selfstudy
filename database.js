@@ -1,20 +1,37 @@
 var crypto = require('crypto');
 var exercises = require('./exercises');
 
-// Create fake IDs
-exercises.forEach(function(exercise) {
+function fakeId(_multiargs) {
   var hash = crypto.Hash('sha1');
-  hash.update(exercise.q);
-  hash.update(exercise.a);
+  for (var i=0; i<arguments.length; i++)
+    hash.update(arguments[i]);
   var digest = hash.digest();
   var id = digest[0] * 256 + digest[1];
-  exercise.id = id;
+  return id;
+}
+
+// Create fake IDs for exercises
+exercises.forEach(function(exercise) {
+  exercise.id = fakeId(exercise.q, exercise.a);
 });
 
-function get(cb) {
+var progressMemDb = {};
+
+function setProgress(user, progress, cb) {
+  progressMemDb[fakeId(user.username)] = progress;
+  cb(null);
+}
+
+function getProgress(user, cb) {
+  cb(null, progressMemDb[fakeId(user.username)] || {});
+}
+
+function getExercises(cb) {
   cb(null, exercises);
 }
 
 module.exports = {
-  getExercises: get
+  getProgress: getProgress,
+  setProgress: setProgress,
+  getExercises: getExercises
 }
