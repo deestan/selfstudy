@@ -40,11 +40,6 @@ function init() {
   $.getJSON("/api/exercises", exercisesLoaded);
 }
 
-function setTier(exercise, tierId) {
-  var t = tiers[tierId];
-  exercise.nextTime = Date.now() + t.minSecs * 1000;
-}
-
 function loadProgress(done) {
   try {
     progress = JSON.parse(localStorage.getItem('progress')) || {};
