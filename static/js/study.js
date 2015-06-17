@@ -37,20 +37,7 @@ function init() {
   $(".yay .btn").on('click', yay);
   $(".nay .btn").on('click', nay);
   updateBuckets();
-  $.getJSON("/api/exercises", exercisesLoaded);
-}
-
-function loadProgress(done) {
-  try {
-    progress = JSON.parse(localStorage.getItem('progress')) || {};
-  } catch (error) {
-    progress = {};
-  }
-  done();
-}
-
-function saveProgress() {
-  localStorage.setItem('progress', JSON.stringify(progress));
+  load();
 }
 
 function getProgress(exerciseId) {
@@ -60,14 +47,6 @@ function getProgress(exerciseId) {
       nextTime: 0
     };
   return progress[exerciseId];
-}
-
-function exercisesLoaded(data) {
-  database = data;
-  loadProgress(function() {
-    updateBuckets();
-    nextExercise();
-  });
 }
 
 function reveal() {
