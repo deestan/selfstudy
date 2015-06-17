@@ -45,7 +45,16 @@ function setTier(exercise, tierId) {
   exercise.nextTime = Date.now() + t.minSecs * 1000;
 }
 
-function save() {
+function loadProgress(done) {
+  try {
+    progress = JSON.parse(localStorage.getItem('progress')) || {};
+  } catch (error) {
+    progress = {};
+  }
+  done();
+}
+
+function saveProgress() {
   localStorage.setItem('progress', JSON.stringify(progress));
 }
 
@@ -60,13 +69,10 @@ function getProgress(exerciseId) {
 
 function exercisesLoaded(data) {
   database = data;
-  try {
-    progress = JSON.parse(localStorage.getItem('progress')) || {};
-  } catch (error) {
-    progress = {};
-  }
-  updateBuckets();
-  nextExercise();
+  loadProgress(function() {
+    updateBuckets();
+    nextExercise();
+  });
 }
 
 function reveal() {
@@ -84,7 +90,7 @@ function exerciseAnswered(succeeded) {
     nextTime: Date.now() + newTier.minSecs * 1000
   };
   updateBuckets();
-  save();
+  saveProgress();
   nextExercise();
 }
 
