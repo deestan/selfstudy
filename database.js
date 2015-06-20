@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var crypto = require('crypto');
 var exercises = require('./exercises');
 
@@ -28,8 +29,12 @@ function getProgress(user, cb) {
   cb(null, progressMemDb[fakeId(user.username)] || {});
 }
 
-function getExercises(id, cb) {
-  cb(null, exercises[id]);
+function getExercises(ids, cb) {
+  var result = [];
+  ids.forEach(function(id) {
+    result = _.union(result, exercises[id]);
+  });
+  cb(null, result);
 }
 
 module.exports = {
