@@ -21,11 +21,14 @@ function load(done) {
   }
 
   function loadProgress(done) {
-    try {
-      return done(JSON.parse(localStorage.getItem('progress')) || {});
-    } catch (error) {
-      return done({});
-    }
+    $.getJSON("/api/myProgress", progressLoaded)
+      .fail(function notLoaded() {
+        try {
+          return done(JSON.parse(localStorage.getItem('progress')) || {});
+        } catch (error) {
+          return done({});
+        }
+      });
   }
 
   loadProgress(progressLoaded);
