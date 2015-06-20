@@ -37,7 +37,10 @@ function init() {
   $(".yay .btn").on('click', yay);
   $(".nay .btn").on('click', nay);
   updateBuckets();
-  load();
+  load(function allLoaded() {
+    updateBuckets();
+    nextExercise();
+  });
 }
 
 function getProgress(exerciseId) {
