@@ -28,7 +28,9 @@ app.get('/api/exercises', function(req, res) {
   });
 });
 
-app.get('/api/progress', function(req, res) {
+app.get('/api/myProgress', function(req, res) {
+  if (!res.user)
+    return res.status(401).send("Not logged in");
   database.getProgress(req.user, function(err, progress) {
     if (err) return res.status(500).send(err);
     res.json({ progress: progress });
