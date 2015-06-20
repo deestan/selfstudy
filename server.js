@@ -22,7 +22,7 @@ app.use(passport.session());
 app.use(express.static(__dirname + "/static"));
 
 app.get('/api/exercises', function(req, res) {
-  database.getExercises(function(err, exercises) {
+  database.getExercises("HTML & CSS part 1", function(err, exercises) {
     if (err) return res.status(500).send(err);
     res.json({ exercises: exercises });
   });

@@ -11,9 +11,11 @@ function fakeId(_multiargs) {
 }
 
 // Create fake IDs for exercises
-exercises.forEach(function(exercise) {
-  exercise.id = fakeId(exercise.q, exercise.a);
-});
+for (var setId in exercises) {
+  exercises[setId].forEach(function(exercise) {
+    exercise.id = fakeId(exercise.q, exercise.a);
+  });
+}
 
 var progressMemDb = {};
 
@@ -26,8 +28,8 @@ function getProgress(user, cb) {
   cb(null, progressMemDb[fakeId(user.username)] || {});
 }
 
-function getExercises(cb) {
-  cb(null, exercises);
+function getExercises(id, cb) {
+  cb(null, exercises[id]);
 }
 
 module.exports = {
