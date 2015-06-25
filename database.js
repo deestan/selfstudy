@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var crypto = require('crypto');
 var exercises = require('./exercises');
+var fs = require('fs');
 
 function fakeId(_multiargs) {
   var hash = crypto.Hash('sha1');
@@ -18,15 +19,16 @@ for (var setId in exercises) {
   });
 }
 
-var progressMemDb = {};
-
 function setProgress(user, progress, cb) {
-  progressMemDb[fakeId(user.username)] = progress;
-  cb(null);
+  fs.writeFile('db/' + fakeId(user.username), JSON.stringify(progress), cb);
 }
 
 function getProgress(user, cb) {
-  cb(null, progressMemDb[fakeId(user.username)] || {});
+  fs.readFile('db/' + fakeId(user.username), function(err, data) {
+    if (err.code == 'ENOENT') return cb(null, {});
+    if (err) return cb(err);
+    cb(null, JSON.parse(data));
+  });
 }
 
 function getExercises(ids, cb) {
