@@ -41,5 +41,23 @@ function load(done) {
 }
 
 function saveProgress() {
-  localStorage.setItem('progress', JSON.stringify(progress));
+  $.ajax({
+    type: "PUT",
+    url: '/api/myProgress',
+    contentType: "application/json",
+    data: JSON.stringify(progress)
+  })
+    .fail(function notStored(failure) {
+      if (failure.status == 401) {
+        try {
+          localStorage.setItem('progress', JSON.stringify(progress));
+        } catch (error) {
+          console.log("Could not save progress in localStorage.");
+          console.log(error);
+        }
+      } else {
+        console.log("Unrecognized failure on progress save.");
+        console.log(failure);
+      }
+    });
 }
