@@ -14,7 +14,6 @@ module.exports = function(passport) {
     passwordField: 'password',
     passReqToCallback: true
   }, function(req, username, password, done) {
-    console.log('is it working?');
     return done(null, { username: username, fake: true });
   }));
 }
