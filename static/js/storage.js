@@ -23,7 +23,6 @@ function load(done) {
   function loadProgress(done) {
     $.getJSON("/api/myProgress", progressLoaded)
       .fail(function notLoaded(failure) {
-        console.log(failure);
         if (failure.status == 401) {
           try {
             return done(JSON.parse(localStorage.getItem('progress')) || {});
