@@ -37,7 +37,7 @@ app.get('/api/myProgress', function(req, res) {
   });
 });
 
-app.put('/api/progress', function(req, res) {
+app.put('/api/myProgress', function(req, res) {
   var progress = req.body;
   database.setProgress(req.user, progress, function(err) {
     if (err) return res.status(500).send(err);
